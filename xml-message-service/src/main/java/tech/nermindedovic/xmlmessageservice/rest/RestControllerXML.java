@@ -1,14 +1,12 @@
-package tech.nermindedovic.xmlmessageservice;
-
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+package tech.nermindedovic.xmlmessageservice.rest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.xml.stream.XMLStreamReader;
+import tech.nermindedovic.xmlmessageservice.business.PaymentMessageParser;
+import tech.nermindedovic.xmlmessageservice.business.domain.PaymentMessage;
 
 import static org.springframework.http.MediaType.*;
 
@@ -38,6 +36,18 @@ public class RestControllerXML {
     )
     private PaymentMessage getPaymentMessage(@RequestBody final PaymentMessage msg) throws Exception {
         return msg;
+    }
+
+
+
+    @PostMapping(path = "parse-xml-string",
+        consumes = APPLICATION_XML_VALUE,
+        produces = APPLICATION_XML_VALUE
+    )
+    private PaymentMessage parseXMLMessage(@RequestBody final String msg) throws Exception {
+        PaymentMessage paymentMessage = PaymentMessageParser.parsePaymentMessageToString(msg);
+        log.info(paymentMessage.toString());
+        return paymentMessage;
     }
 
 
