@@ -137,8 +137,6 @@ class RestControllerXMLTest {
                 .andReturn().getResponse().equals(expected);
 
 
-
-
     }
 
 

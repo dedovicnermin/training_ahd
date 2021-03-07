@@ -13,9 +13,6 @@ public class Debtor implements IMessage {
     private String accountNumber;
     private String amount;
 
-    public boolean isEmpty() {
-        return name==null && address==null && accountNumber==null && amount==null;
-    }
 
 
 }

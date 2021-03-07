@@ -24,7 +24,7 @@ public class PaymentMessageParser {
 
 
 
-    public static PaymentMessage parsePaymentMessageToString(String msg) throws XMLStreamException {
+    public static PaymentMessage parsePaymentMessage(final String msg) throws XMLStreamException {
 
         XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
         XMLStreamReader eventReader = xmlInputFactory.createXMLStreamReader(new ByteArrayInputStream(msg.getBytes(StandardCharsets.UTF_8)));
@@ -50,7 +50,7 @@ public class PaymentMessageParser {
 
             switch (event) {
                 case 1:
-                    startTag(eventReader, stack, map);
+                    startTag(eventReader, stack);
                     break;
                 case 2:
                     endTag(eventReader, stack, map);
@@ -79,7 +79,7 @@ public class PaymentMessageParser {
 
     }
 
-    private static void startTag(XMLStreamReader eventReader, Stack<String> stack, Map<String, IMessage> map) {
+    private static void startTag(final XMLStreamReader eventReader, final Stack<String> stack) {
         if (eventReader.hasName()) {
             String tagName = eventReader.getLocalName();
             switch (tagName) {
@@ -154,6 +154,10 @@ public class PaymentMessageParser {
         }
 
     }
+
+
+
+  
 
 
 

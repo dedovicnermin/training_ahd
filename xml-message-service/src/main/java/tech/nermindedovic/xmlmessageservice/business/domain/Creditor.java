@@ -11,7 +11,5 @@ public class Creditor implements IMessage{
     private String address;
     private String accountNumber;
 
-    public boolean isEmpty() {
-        return name==null && address==null && accountNumber==null;
-    }
+
 }
