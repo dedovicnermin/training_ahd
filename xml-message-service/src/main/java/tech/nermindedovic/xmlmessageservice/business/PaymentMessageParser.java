@@ -24,40 +24,18 @@ public class PaymentMessageParser {
 
     public static PaymentMessage parsePaymentMessage(String msg) throws XMLStreamException {
 
+        Stack<>
 
         XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
         XMLEventReader reader = xmlInputFactory.createXMLEventReader(new ByteArrayInputStream(msg.getBytes(StandardCharsets.UTF_8)));
 
-        PaymentMessage paymentMessage = new PaymentMessage();
-        Debtor debtor;
-        Creditor creditor;
-
         while (reader.hasNext()) {
-            XMLEvent nextEvent = reader.nextEvent();
-            if (nextEvent.isStartElement()) {
 
-                StartElement startElement = nextEvent.asStartElement();
-                if (startElement.isStartElement()) {
-                    if (startElement.getName().equals("PaymentMessage")) {
-
-                    }
-                }
-
-                if (startElement.getName().equals("Debtor")) {
-                    debtor = new Debtor();
-                    while (reader.hasNext() && startElement.isEndElement()) {
-                        XMLEvent propEvent = reader.nextEvent();
-                        if (propEvent.isStartElement()) {
-
-                        }
-                    }
-                }
-
-
-            }
-
+            XmlEvent
 
         }
+
+
 
     }
 
