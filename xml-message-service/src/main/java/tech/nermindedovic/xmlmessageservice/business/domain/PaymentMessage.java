@@ -1,10 +1,10 @@
-package tech.nermindedovic.xmlmessageservice;
+package tech.nermindedovic.xmlmessageservice.business.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
+import tech.nermindedovic.xmlmessageservice.business.domain.Creditor;
+import tech.nermindedovic.xmlmessageservice.business.domain.Debtor;
 
 @Data
 //@JsonIgnoreProperties(ignoreUnknown = true)

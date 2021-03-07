@@ -1,13 +1,15 @@
 package tech.nermindedovic.xmlmessageservice;
 
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
+import tech.nermindedovic.xmlmessageservice.business.domain.Creditor;
+import tech.nermindedovic.xmlmessageservice.business.domain.Debtor;
+import tech.nermindedovic.xmlmessageservice.business.domain.PaymentMessage;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -24,23 +26,25 @@ class RestControllerXMLTest {
     @Autowired
     private MockMvc mockMvc;
 
+    private String xml = "<PaymentMessage>" +
+            "    <Debtor>" +
+            "        <name>Jiraya</name>\n" +
+            "        <address>Village Hidden in the Leaves</address>\n" +
+            "        <accountNumber>03151999</accountNumber>\n" +
+            "        <amount>100.00</amount>\n" +
+            "    </Debtor>\n" +
+            "    <Creditor>\n" +
+            "        <name>Naruto</name>\n" +
+            "        <address>Village Hidden in the Leaves</address>\n" +
+            "        <accountNumber>04281999</accountNumber>\n" +
+            "    </Creditor>\n" +
+            "</PaymentMessage>";
+
     @Test
     @DisplayName("XML String -> String Test")
     public void from_xml_to_string_test() throws Exception {
         String url = "/api/get-string";
-        String xml = "<PaymentMessage>\n" +
-                "    <Debtor>\n" +
-                "        <name>Jiraya</name>\n" +
-                "        <address>Village Hidden in the Leaves</address>\n" +
-                "        <accountNumber>03151999</accountNumber>\n" +
-                "        <amount>100.00</amount>\n" +
-                "    </Debtor>\n" +
-                "    <Creditor>\n" +
-                "        <name>Naruto</name>\n" +
-                "        <address>Village Hidden in the Leaves</address>\n" +
-                "        <accountNumber>04281999</accountNumber>\n" +
-                "    </Creditor>\n" +
-                "</PaymentMessage>";
+
 
         String result = mockMvc.perform(post(url)
             .contentType(APPLICATION_XML_VALUE)
@@ -85,37 +89,52 @@ class RestControllerXMLTest {
     @DisplayName("Payment Message XML -> Payment Message XML")
     public void given_payment_message_returns_payment_message() throws Exception {
         String url = "/api/get-paymentmessage";
-        String xml = "<PaymentMessage>\n" +
-                "    <Debtor>\n" +
-                "        <name>Jiraya</name>\n" +
-                "        <address>Village Hidden in the Leaves</address>\n" +
-                "        <accountNumber>03151999</accountNumber>\n" +
-                "        <amount>100.00</amount>\n" +
-                "    </Debtor>\n" +
-                "    <Creditor>\n" +
-                "        <name>Naruto</name>\n" +
-                "        <address>Village Hidden in the Leaves</address>\n" +
-                "        <accountNumber>04281999</accountNumber>\n" +
-                "    </Creditor>\n" +
-                "</PaymentMessage>";
+
         PaymentMessage expected = new PaymentMessage();
         expected.setDebtor(new Debtor());
         expected.setCreditor(new Creditor());
 
         expected.getDebtor().setName("Jiraya");
         expected.getDebtor().setAddress("Village Hidden in the Leaves");
-        expected.getDebtor().setAccountNumber(3151999);
+        expected.getDebtor().setAccountNumber("3151999");
         expected.getDebtor().setAmount("100");
 
         expected.getCreditor().setName("Naruto");
         expected.getCreditor().setAddress("Village Hidden in the Leaves");
-        expected.getCreditor().setAccountNumber(4281999);
+        expected.getCreditor().setAccountNumber("4281999");
 
         mockMvc.perform(post(url)
             .contentType(APPLICATION_XML_VALUE)
             .content(xml))
             .andExpect(status().isOk())
             .andReturn().getResponse().equals(expected);
+
+
+    }
+
+
+    @Test
+    public void xml_string_returns_parsed_paymentMessage() throws Exception {
+        String url = "/api/parse-xml-string";
+
+        PaymentMessage expected = new PaymentMessage();
+        expected.setDebtor(new Debtor());
+        expected.setCreditor(new Creditor());
+
+        expected.getDebtor().setName("Jiraya");
+        expected.getDebtor().setAddress("Village Hidden in the Leaves");
+        expected.getDebtor().setAccountNumber("3151999");
+        expected.getDebtor().setAmount("100");
+
+        expected.getCreditor().setName("Naruto");
+        expected.getCreditor().setAddress("Village Hidden in the Leaves");
+        expected.getCreditor().setAccountNumber("4281999");
+
+        mockMvc.perform(post(url)
+                .contentType(APPLICATION_XML_VALUE)
+                .content(xml))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().equals(expected);
 
 
     }
