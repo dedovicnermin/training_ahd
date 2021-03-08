@@ -1,4 +1,4 @@
-package tech.nermindedovic.xmlmessageservice.xml.trackers;
+package tech.nermindedovic.xmlmessageservice.onepassparser.trackers;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +22,7 @@ public abstract class TagTracker {
     }
 
     public void on_start_tag(final String tag, final Stack<TagTracker> stack) {
-        log.info("\n<" + tag + ">");
+        log.info("<" + tag + ">");
 
         TagTracker tracker = TrackerFactory.getInstance(tag);
         if (tracker == null) return;

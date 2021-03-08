@@ -1,7 +1,4 @@
-package tech.nermindedovic.xmlmessageservice.xml.trackers;
-
-
-import lombok.ToString;
+package tech.nermindedovic.xmlmessageservice.onepassparser.trackers;
 
 
 public class Address extends TagTracker {

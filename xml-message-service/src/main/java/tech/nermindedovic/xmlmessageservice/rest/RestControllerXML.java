@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.nermindedovic.xmlmessageservice.xml.XMLParser;
-import tech.nermindedovic.xmlmessageservice.xml.trackers.PaymentMessage;
+import tech.nermindedovic.xmlmessageservice.onepassparser.XMLParser;
+import tech.nermindedovic.xmlmessageservice.onepassparser.trackers.PaymentMessage;
 
 
 import static org.springframework.http.MediaType.*;
