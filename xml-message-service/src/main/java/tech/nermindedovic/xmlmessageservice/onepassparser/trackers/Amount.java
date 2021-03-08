@@ -1,4 +1,4 @@
-package tech.nermindedovic.xmlmessageservice.xml.trackers;
+package tech.nermindedovic.xmlmessageservice.onepassparser.trackers;
 
 
 public class Amount extends TagTracker {

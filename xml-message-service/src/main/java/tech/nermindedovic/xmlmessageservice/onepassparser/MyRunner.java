@@ -1,4 +1,4 @@
-package tech.nermindedovic.xmlmessageservice.xml;
+package tech.nermindedovic.xmlmessageservice.onepassparser;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

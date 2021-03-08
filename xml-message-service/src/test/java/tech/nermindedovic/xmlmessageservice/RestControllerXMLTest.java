@@ -1,22 +1,13 @@
 package tech.nermindedovic.xmlmessageservice;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
-import tech.nermindedovic.xmlmessageservice.xml.trackers.Creditor;
-import tech.nermindedovic.xmlmessageservice.xml.trackers.Debtor;
-import tech.nermindedovic.xmlmessageservice.xml.trackers.PaymentMessage;
 
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @AutoConfigureMockMvc
