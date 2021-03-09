@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.nermindedovic.xmlmessageservice.onepassparser.XMLParser;
 import tech.nermindedovic.xmlmessageservice.onepassparser.trackers.PaymentMessage;
+import tech.nermindedovic.xmlmessageservice.twopassparser.XMLParser2P;
+import tech.nermindedovic.xmlmessageservice.twopassparser.data.NetworkBatch;
 
 
 import static org.springframework.http.MediaType.*;
@@ -25,8 +27,7 @@ public class RestControllerXML {
             consumes = APPLICATION_XML_VALUE
     )
     private PaymentMessage parseXMLMessageToObject(@RequestBody final String msg) throws Exception {
-        PaymentMessage paymentMessage = XMLParser.parsePaymentMessage(msg);
-        return  paymentMessage;
+        return XMLParser.parsePaymentMessage(msg);
     }
 
 
@@ -38,8 +39,27 @@ public class RestControllerXML {
             consumes = APPLICATION_XML_VALUE
     )
     private String parseXMLMessageToString(@RequestBody final String msg) throws Exception {
-        PaymentMessage paymentMessage = XMLParser.parsePaymentMessage(msg);
-        return  paymentMessage.toString();
+        return XMLParser.parsePaymentMessage(msg).toString();
+    }
+
+
+
+
+    @PostMapping(path = "parsetp-xml-toobject",
+            consumes = APPLICATION_XML_VALUE
+    )
+    private NetworkBatch twoParseXMLMessageToObject(@RequestBody final String msg) throws Exception {
+        NetworkBatch networkBatch = XMLParser2P.parseXML(msg);
+        return networkBatch;
+    }
+
+
+
+    @PostMapping(path = "parsetp-xml-tostring",
+            consumes = APPLICATION_XML_VALUE
+    )
+    private String twoParseXMLMessageToString(@RequestBody final String msg) throws Exception {
+        return XMLParser2P.parseXML(msg).toString();
     }
 
 

@@ -49,6 +49,12 @@
 			<version>RELEASE</version>
 			<scope>compile</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom2</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
